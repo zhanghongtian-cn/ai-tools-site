@@ -1,0 +1,1171 @@
+export interface AITool {
+  id: string;
+  name: string;
+  nameEn: string;
+  category: string;
+  subcategory: string;
+  description: string;
+  longDescription: string;
+  features: string[];
+  pricing: string;
+  pricingDetail: string;
+  pros: string[];
+  cons: string[];
+  website: string;
+  affiliateUrl: string;
+  logo: string;
+  tags: string[];
+  rating: number;
+  visitCount: number;
+  createdAt: string;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  tags: string[];
+  author: string;
+  publishedAt: string;
+  updatedAt: string;
+  coverImage: string;
+  readingTime: number;
+  featured: boolean;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  nameEn: string;
+  icon: string;
+  description: string;
+  count: number;
+}
+
+export const categories: Category[] = [
+  { id: "writing", name: "AI写作", nameEn: "AI Writing", icon: "✍️", description: "智能写作、内容生成、文案创作", count: 0 },
+  { id: "image", name: "AI绘画", nameEn: "AI Image", icon: "🎨", description: "图像生成、图片编辑、艺术创作", count: 0 },
+  { id: "coding", name: "AI编程", nameEn: "AI Coding", icon: "💻", description: "代码生成、编程助手、代码审查", count: 0 },
+  { id: "video", name: "AI视频", nameEn: "AI Video", icon: "🎬", description: "视频生成、视频编辑、短视频创作", count: 0 },
+  { id: "office", name: "AI办公", nameEn: "AI Office", icon: "📊", description: "文档处理、表格制作、PPT生成", count: 0 },
+  { id: "chatbot", name: "AI对话", nameEn: "AI Chat", icon: "💬", description: "智能对话、问答系统、客服机器人", count: 0 },
+  { id: "audio", name: "AI音频", nameEn: "AI Audio", icon: "🎵", description: "语音合成、音频编辑、音乐生成", count: 0 },
+  { id: "research", name: "AI研究", nameEn: "AI Research", icon: "🔬", description: "学术研究、数据分析、科学计算", count: 0 },
+];
+
+export const aiTools: AITool[] = [
+  {
+    id: "chatgpt",
+    name: "ChatGPT",
+    nameEn: "ChatGPT",
+    category: "chatbot",
+    subcategory: "大语言模型",
+    description: "OpenAI开发的AI对话助手，支持多轮对话、代码生成、内容创作等",
+    longDescription: `ChatGPT是OpenAI于2022年11月推出的人工智能聊天机器人程序，基于GPT-4架构开发。它能够进行自然语言对话、回答问题、撰写文章、编写代码、翻译等多种任务。ChatGPT以其强大的语言理解和生成能力，迅速成为全球最受欢迎的AI工具之一。
+
+**主要特点：**
+- 支持多轮连续对话，理解上下文语境
+- 强大的文本生成能力，可撰写各类文章
+- 代码编写和调试辅助
+- 支持插件扩展，可联网搜索
+- 多语言支持，包括中文
+
+**适用场景：**
+- 内容创作与写作辅助
+- 代码编写与调试
+- 学习教育与知识问答
+- 商业文案撰写
+- 日常问题解答`,
+    features: ["多轮对话", "代码生成", "文章撰写", "翻译", "插件系统", "联网搜索"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版基于GPT-3.5，付费版ChatGPT Plus月费20美元可使用GPT-4",
+    pros: ["对话能力强", "生态完善", "插件丰富", "社区活跃"],
+    cons: ["免费版有使用限制", "中国访问不便", "偶尔会编造信息"],
+    website: "https://chat.openai.com",
+    affiliateUrl: "https://affiliate.example.com/chatgpt",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+    tags: ["AI对话", "大语言模型", "GPT-4", "OpenAI"],
+    rating: 4.9,
+    visitCount: 156000,
+    createdAt: "2024-01-15"
+  },
+  {
+    id: "claude",
+    name: "Claude",
+    nameEn: "Claude",
+    category: "chatbot",
+    subcategory: "大语言模型",
+    description: "Anthropic开发的AI助手，以安全性和长文本处理能力著称",
+    longDescription: `Claude是Anthropic公司开发的AI助手，以其卓越的安全性、长文本处理能力和对话逻辑著称。Claude 2版本支持高达200K token的上下文窗口，能够处理整本书籍、长篇文档分析等复杂任务。
+
+**主要特点：**
+- 超长上下文窗口（200K tokens）
+- 强大的长文本分析和总结能力
+- 注重AI安全和伦理
+- 支持文档上传和分析
+- 优秀的编程辅助能力
+
+**适用场景：**
+- 长文档阅读和分析
+- 复杂项目代码审查
+- 学术论文写作
+- 创意写作
+- 深度知识探讨`,
+    features: ["超长上下文", "文档分析", "代码审查", "安全AI", "多语言"],
+    pricing: "免费/付费",
+    pricingDetail: "免费额度用完后，Claude Pro月费20美元",
+    pros: ["长文本能力强", "安全性高", "回答质量高", "不胡编乱造"],
+    cons: ["免费额度有限", "生成速度较慢", "中文能力略弱"],
+    website: "https://claude.ai",
+    affiliateUrl: "https://affiliate.example.com/claude",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Claude_icon.svg",
+    tags: ["AI对话", "大语言模型", "Anthropic", "长文本"],
+    rating: 4.8,
+    visitCount: 89000,
+    createdAt: "2024-01-20"
+  },
+  {
+    id: "midjourney",
+    name: "Midjourney",
+    nameEn: "Midjourney",
+    category: "image",
+    subcategory: "AI绘画",
+    description: "强大的AI图像生成工具，以艺术风格见长",
+    longDescription: `Midjourney是一款基于Discord平台的AI图像生成工具，以其出色的艺术风格和视觉效果而闻名。用户通过简单的文本描述（prompt）即可生成高质量的图像作品。
+
+**主要特点：**
+- 艺术风格出众，图像质量高
+- 操作简单，通过Discord交互
+- 社区氛围活跃，灵感丰富
+- 支持风格定制和参数调整
+- 持续迭代更新
+
+**适用场景：**
+- 艺术创作与设计灵感
+- 社交媒体配图
+- 产品概念设计
+- 游戏美术素材
+- 品牌视觉设计`,
+    features: ["文生图", "风格多样", "高质量输出", "社区分享", "参数微调"],
+    pricing: "付费订阅",
+    pricingDetail: "基础版月费10美元，标准版30美元，专业版60美元",
+    pros: ["图像质量高", "艺术感强", "社区活跃", "操作简单"],
+    cons: ["需要付费", "需要科学上网", "版权争议"],
+    website: "https://www.midjourney.com",
+    affiliateUrl: "https://affiliate.example.com/midjourney",
+    logo: "https://cjridgeway.com/wp-content/uploads/2023/01/midjourney-emblem-1-768x432.png",
+    tags: ["AI绘画", "文生图", "艺术创作", "Midjourney"],
+    rating: 4.7,
+    visitCount: 67000,
+    createdAt: "2024-02-01"
+  },
+  {
+    id: "stable-diffusion",
+    name: "Stable Diffusion",
+    nameEn: "Stable Diffusion",
+    category: "image",
+    subcategory: "AI绘画",
+    description: "开源免费的高质量AI图像生成模型",
+    longDescription: `Stable Diffusion是由Stability AI开发的开源AI图像生成模型，以其免费、开源、本地部署能力而广受欢迎。它基于Latent Diffusion架构，能够在消费级显卡上运行。
+
+**主要特点：**
+- 完全开源免费
+- 支持本地部署
+- 模型生态丰富
+- 可自定义训练
+- 隐私保护强
+
+**适用场景：**
+- 个人创作
+- 商业项目
+- 模型二次开发
+- 研究学习
+- 批量图像生成`,
+    features: ["开源免费", "本地部署", "模型众多", "自定义训练", "隐私安全"],
+    pricing: "免费",
+    pricingDetail: "完全免费，可本地部署",
+    pros: ["完全免费", "本地运行", "可定制", "社区丰富"],
+    cons: ["需要硬件配置", "上手有门槛", "质量不如MJ"],
+    website: "https://stability.ai",
+    affiliateUrl: "https://affiliate.example.com/stable-diffusion",
+    logo: "https://platform.stability.ai/logo.png",
+    tags: ["AI绘画", "开源", "本地部署", "Stable Diffusion"],
+    rating: 4.6,
+    visitCount: 78000,
+    createdAt: "2024-02-05"
+  },
+  {
+    id: "dall-e",
+    name: "DALL-E",
+    nameEn: "DALL-E",
+    category: "image",
+    subcategory: "AI绘画",
+    description: "OpenAI开发的AI图像生成器，支持图像编辑和变体生成",
+    longDescription: `DALL-E是OpenAI开发的AI图像生成模型，最新版本DALL-E 3集成在ChatGPT中，提供更精确的图像生成能力。它特别擅长理解复杂的文本描述并生成对应图像。
+
+**主要特点：**
+- 与ChatGPT集成
+- 理解复杂prompt
+- 图像编辑功能
+- 一致性风格保持
+- 安全内容过滤
+
+**适用场景：**
+- 概念设计
+- 插画创作
+- 产品原型
+- 品牌素材
+- 社交媒体内容`,
+    features: ["文生图", "图生图", "图像编辑", "风格保持", "ChatGPT集成"],
+    pricing: "积分制",
+    pricingDetail: "ChatGPT Plus用户可用，115美元可购买1150积分",
+    pros: ["与ChatGPT集成", "prompt理解强", "安全性高", "品牌可信"],
+    cons: ["需要付费", "风格有限制", "速度较慢"],
+    website: "https://openai.com/dall-e-3",
+    affiliateUrl: "https://affiliate.example.com/dall-e",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+    tags: ["AI绘画", "OpenAI", "文生图", "DALL-E"],
+    rating: 4.5,
+    visitCount: 45000,
+    createdAt: "2024-02-10"
+  },
+  {
+    id: "cursor",
+    name: "Cursor",
+    nameEn: "Cursor",
+    category: "coding",
+    subcategory: "AI编程",
+    description: "AI代码编辑器，专注提升编程效率",
+    longDescription: `Cursor是一款专为AI时代打造的代码编辑器，基于VS Code开发，集成了强大的AI辅助编程功能。它支持代码补全、代码解释、Bug修复、代码重构等多种功能。
+
+**主要特点：**
+- AI代码补全和建议
+- 对话式代码生成
+- 代码解释和问答
+- Bug自动修复
+- 多文件编辑
+
+**适用场景：**
+- 日常编程开发
+- 代码学习和理解
+- Bug修复和调试
+- 代码重构
+- 项目协作`,
+    features: ["代码补全", "AI对话", "Bug修复", "代码解释", "多文件编辑"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版有使用限制，Pro版月费20美元",
+    pros: ["编程效率高", "上手快", "功能全面", "免费版够用"],
+    cons: ["免费版有限制", "偶有卡顿", "生态不如VSCode"],
+    website: "https://cursor.sh",
+    affiliateUrl: "https://affiliate.example.com/cursor",
+    logo: "https://cursor.sh/cdn沐浴.jpg",
+    tags: ["AI编程", "代码编辑器", "Cursor"],
+    rating: 4.8,
+    visitCount: 52000,
+    createdAt: "2024-02-15"
+  },
+  {
+    id: "github-copilot",
+    name: "GitHub Copilot",
+    nameEn: "GitHub Copilot",
+    category: "coding",
+    subcategory: "AI编程",
+    description: "微软和GitHub联合开发的AI编程助手",
+    longDescription: `GitHub Copilot是由GitHub、OpenAI和微软联合开发的AI编程助手，被誉为"程序员的AI搭档"。它集成在IDE中，能够实时提供代码补全和建议。
+
+**主要特点：**
+- 实时代码补全
+- 整行或整函数补全
+- 支持多种语言
+- 代码解释
+- 测试代码生成
+
+**适用场景：**
+- 日常开发编码
+- 学习新语言
+- 代码补全加速
+- 重复代码生成
+- 测试用例编写`,
+    features: ["代码补全", "多语言支持", "IDE集成", "测试生成", "文档生成"],
+    pricing: "付费订阅",
+    pricingDetail: "个人版月费10美元，年付100美元",
+    pros: ["代码质量高", "集成完善", "微软生态", "支持广泛"],
+    cons: ["需要付费", "偶有错误建议", "隐私顾虑"],
+    website: "https://github.com/features/copilot",
+    affiliateUrl: "https://affiliate.example.com/copilot",
+    logo: "https://github.githubassets.com/images/modules/site/copilot/productivity-bg-head.svg",
+    tags: ["AI编程", "GitHub", "微软", "代码补全"],
+    rating: 4.7,
+    visitCount: 89000,
+    createdAt: "2024-02-20"
+  },
+  {
+    id: "coze",
+    name: "Coze扣子",
+    nameEn: "Coze",
+    category: "chatbot",
+    subcategory: "AI应用搭建",
+    description: "字节跳动推出的AI应用搭建平台，无需编程即可创建AI Bot",
+    longDescription: `Coze（扣子）是字节跳动推出的AI应用开发平台，提供零代码/低代码方式创建AI聊天机器人和应用。用户可以快速搭建专属的AI Bot，配置知识库、工作流和插件。
+
+**主要特点：**
+- 零代码Bot创建
+- 丰富的插件市场
+- 知识库配置
+- 工作流编排
+- 多平台发布
+
+**适用场景：**
+- 企业客服搭建
+- 内容发布机器人
+- 个人AI助手
+- 教育培训
+- 电商客服`,
+    features: ["零代码", "插件市场", "知识库", "工作流", "多平台发布"],
+    pricing: "免费",
+    pricingDetail: "基础功能免费，高级功能按量付费",
+    pros: ["免费使用", "上手简单", "字节生态", "插件丰富"],
+    cons: ["高级功能收费", "国际版限制", "依赖平台"],
+    website: "https://coze.cn",
+    affiliateUrl: "https://affiliate.example.com/coze",
+    logo: "https://lf-bot-studio-plugin-resource.coze.cn/95r3s2f7dpic/73f0bddbb7d7e.png",
+    tags: ["AI应用", "Bot开发", "字节跳动", "零代码"],
+    rating: 4.6,
+    visitCount: 34000,
+    createdAt: "2024-02-25"
+  },
+  {
+    id: "notion-ai",
+    name: "Notion AI",
+    nameEn: "Notion AI",
+    category: "office",
+    subcategory: "文档处理",
+    description: "集成在Notion中的AI写作助手",
+    longDescription: `Notion AI是集成在Notion笔记工具中的AI助手，能够帮助用户更高效地进行写作、总结、翻译、头脑风暴等任务。它直接在Notion工作空间中提供AI能力。
+
+**主要特点：**
+- 集成在笔记中
+- 写作辅助
+- 智能总结
+- 翻译功能
+- 头脑风暴
+
+**适用场景：**
+- 笔记整理
+- 文章写作
+- 会议记录
+- 项目文档
+- 头脑风暴`,
+    features: ["写作辅助", "智能总结", "翻译", "头脑风暴", "内容续写"],
+    pricing: "免费/付费",
+    pricingDetail: "免费用户有额度限制，Plus版月费10美元含AI无限使用",
+    pros: ["集成良好", "使用便捷", "功能实用", "提高效率"],
+    cons: ["需要Notion", "免费额度少", "离线不可用"],
+    website: "https://notion.so",
+    affiliateUrl: "https://affiliate.example.com/notion-ai",
+    logo: "https://www.notion.so/images/favicon.ico",
+    tags: ["AI办公", "笔记", "写作", "Notion"],
+    rating: 4.5,
+    visitCount: 43000,
+    createdAt: "2024-03-01"
+  },
+  {
+    id: "gamma",
+    name: "Gamma",
+    nameEn: "Gamma",
+    category: "office",
+    subcategory: "PPT生成",
+    description: "AI驱动的PPT和网页演示文稿生成工具",
+    longDescription: `Gamma是一款AI驱动的演示文稿和网页生成工具，用户只需输入主题或大纲，即可自动生成精美的PPT或网页。它支持实时协作和丰富的模板。
+
+**主要特点：**
+- AI自动生成PPT
+- 丰富的模板库
+- 实时协作
+- 嵌入多媒体
+- 多种导出格式
+
+**适用场景：**
+- 商业演示
+- 教学课件
+- 产品介绍
+- 会议演讲
+- 方案汇报`,
+    features: ["AI生成", "模板丰富", "实时协作", "多媒体嵌入", "一键导出"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版有限制，Pro版月费18美元",
+    pros: ["生成快速", "设计美观", "上手简单", "协作方便"],
+    cons: ["免费版功能少", "依赖网络", "定制有限"],
+    website: "https://gamma.app",
+    affiliateUrl: "https://affiliate.example.com/gamma",
+    logo: "https://gamma.app/favicon.ico",
+    tags: ["AI办公", "PPT", "演示文稿", "Gamma"],
+    rating: 4.6,
+    visitCount: 38000,
+    createdAt: "2024-03-05"
+  },
+  {
+    id: "runway",
+    name: "Runway",
+    nameEn: "Runway",
+    category: "video",
+    subcategory: "AI视频",
+    description: "领先的AI视频生成和编辑平台",
+    longDescription: `Runway是一家专注于AI视频技术的公司，提供Gen-1、Gen-2等视频生成模型，支持文生视频、图生视频、视频编辑等功能，是AI视频领域的领导者。
+
+**主要特点：**
+- 视频生成
+- 视频编辑
+- 风格迁移
+- 绿幕抠像
+- 运动追踪
+
+**适用场景：**
+- 短视频创作
+- 电影特效
+- 广告制作
+- 内容创作
+- 教育视频`,
+    features: ["文生视频", "视频编辑", "风格迁移", "特效", "绿幕抠像"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版有额度，标准版月费15美元",
+    pros: ["技术领先", "功能强大", "持续更新", "社区活跃"],
+    cons: ["需要付费", "生成速度慢", "版权问题"],
+    website: "https://runwayml.com",
+    affiliateUrl: "https://affiliate.example.com/runway",
+    logo: "https://runwayml.com/logo.png",
+    tags: ["AI视频", "视频生成", "Runway"],
+    rating: 4.5,
+    visitCount: 42000,
+    createdAt: "2024-03-10"
+  },
+  {
+    id: "suno",
+    name: "Suno",
+    nameEn: "Suno",
+    category: "audio",
+    subcategory: "AI音乐",
+    description: "AI音乐生成工具，可创作歌曲和纯音乐",
+    longDescription: `Suno是一家AI音乐生成初创公司，其模型能够根据文本描述生成完整的歌曲，包括词曲、演唱和编曲。用户可以用它创作各种风格的音乐作品。
+
+**主要特点：**
+- 歌曲生成
+- 多风格支持
+- 歌词创作
+- 多种乐器
+- 自定义参数
+
+**适用场景：**
+- 音乐创作
+- 视频配乐
+- 游戏音乐
+- 广告音乐
+- 个人娱乐`,
+    features: ["歌曲生成", "多风格", "歌词创作", "编曲", "人声合成"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版每日有限额度，Pro版月费10美元",
+    pros: ["音乐质量高", "操作简单", "免费可用", "创意无限"],
+    cons: ["免费版有限", "版权争议", "风格有限制"],
+    website: "https://suno.ai",
+    affiliateUrl: "https://affiliate.example.com/suno",
+    logo: "https://suno.ai/icon.png",
+    tags: ["AI音乐", "歌曲生成", "Suno"],
+    rating: 4.7,
+    visitCount: 58000,
+    createdAt: "2024-03-15"
+  },
+  {
+    id: "perplexity",
+    name: "Perplexity",
+    nameEn: "Perplexity",
+    category: "chatbot",
+    subcategory: "AI搜索",
+    description: "AI驱动的搜索引擎，可以实时获取网络信息",
+    longDescription: `Perplexity是一个AI搜索引擎，结合了大语言模型和实时网络搜索，能够为用户提供准确、带来源的答案。与传统搜索引擎不同，它直接给出答案而非链接列表。
+
+**主要特点：**
+- 实时网络搜索
+- 答案带来源
+- 支持追问
+- 话题探索
+- 学术搜索
+
+**适用场景：**
+- 学术研究
+- 新闻追踪
+- 产品比较
+- 问题解答
+- 深度探索`,
+    features: ["AI搜索", "实时信息", "来源标注", "追问", "学术模式"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版可用，Pro版月费20美元",
+    pros: ["搜索体验好", "信息准确", "带来源", "无广告"],
+    cons: ["免费版有限", "复杂问题处理一般", "隐私顾虑"],
+    website: "https://perplexity.ai",
+    affiliateUrl: "https://affiliate.example.com/perplexity",
+    logo: "https://www.perplexity.ai/favicon.ico",
+    tags: ["AI搜索", "搜索引擎", "Perplexity"],
+    rating: 4.6,
+    visitCount: 49000,
+    createdAt: "2024-03-20"
+  },
+  {
+    id: "kimi",
+    name: "Kimi",
+    nameEn: "Kimi",
+    category: "chatbot",
+    subcategory: "大语言模型",
+    description: "月之暗面开发的AI助手，支持超长上下文",
+    longDescription: `Kimi是月之暗面（Moonshot AI）开发的AI助手，支持20万字的长上下文，在中文理解能力上表现出色。它可以进行对话、搜索、阅读文档等任务。
+
+**主要特点：**
+- 20万字超长上下文
+- 中文能力优秀
+- 文件阅读分析
+- 联网搜索
+- 多轮对话
+
+**适用场景：**
+- 长文档分析
+- 中文写作
+- 知识问答
+- 代码辅助
+- 日常对话`,
+    features: ["超长上下文", "中文优化", "文件阅读", "联网搜索", "多轮对话"],
+    pricing: "免费",
+    pricingDetail: "目前完全免费使用",
+    pros: ["中文强", "长文本免费", "免费使用", "响应快"],
+    cons: ["功能相对单一", "生态不完善", "长期免费不确定"],
+    website: "https://kimi.moonshot.cn",
+    affiliateUrl: "https://affiliate.example.com/kimi",
+    logo: "https://kimi.moonshot.cn/logo.png",
+    tags: ["AI对话", "大语言模型", "Kimi", "中文AI"],
+    rating: 4.7,
+    visitCount: 62000,
+    createdAt: "2024-03-25"
+  },
+  {
+    id: "通义千问",
+    name: "通义千问",
+    nameEn: "Tongyi Qianwen",
+    category: "chatbot",
+    subcategory: "大语言模型",
+    description: "阿里云开发的大语言模型，中文能力出色",
+    longDescription: `通义千问是阿里云自研的大语言模型，具备强大的中文理解和生成能力。它提供多种规模的模型，并已接入阿里云各种产品和服务。
+
+**主要特点：**
+- 中文能力出色
+- 多模态理解
+- 阿里生态集成
+- API接口丰富
+- 开源版本可选
+
+**适用场景：**
+- 企业应用
+- 电商客服
+- 内容生成
+- 编程辅助
+- 知识问答`,
+    features: ["中文优化", "多模态", "API丰富", "开源可用", "阿里生态"],
+    pricing: "免费/付费",
+    pricingDetail: "有免费额度，API按量付费",
+    pros: ["中文能力强", "阿里生态", "性价比高", "开源可用"],
+    cons: ["部分功能需付费", "国际访问受限", "偶有幻觉"],
+    website: "https://tongyi.aliyun.com",
+    affiliateUrl: "https://affiliate.example.com/tongyi",
+    logo: "https://tongyi.aliyun.com/favicon.ico",
+    tags: ["AI对话", "阿里云", "大语言模型", "通义千问"],
+    rating: 4.5,
+    visitCount: 41000,
+    createdAt: "2024-04-01"
+  },
+  {
+    id: "文心一言",
+    name: "文心一言",
+    nameEn: "ERNIE Bot",
+    category: "chatbot",
+    subcategory: "大语言模型",
+    description: "百度开发的生成式AI产品",
+    longDescription: `文心一言是百度基于文心大模型开发的生成式AI产品，具备文学创作、商业文案创作、数理逻辑推算、中文理解、多模态生成等能力。
+
+**主要特点：**
+- 中文理解强
+- 多模态生成
+- 百度生态集成
+- 专业知识丰富
+- 图像生成
+
+**适用场景：**
+- 中文创作
+- 商业文案
+- 教育辅导
+- 图像生成
+- 企业应用`,
+    features: ["中文优化", "多模态", "图像生成", "百度生态", "专业知识"],
+    pricing: "免费/付费",
+    pricingDetail: "基础版免费，高级功能付费",
+    pros: ["中文能力强", "百度生态", "图像生成", "免费可用"],
+    cons: ["部分能力有限", "需百度账号", "国际访问受限"],
+    website: "https://yiyan.baidu.com",
+    affiliateUrl: "https://affiliate.example.com/ernie",
+    logo: "https://yiyan.baidu.com/favicon.ico",
+    tags: ["AI对话", "百度", "大语言模型", "文心一言"],
+    rating: 4.4,
+    visitCount: 55000,
+    createdAt: "2024-04-05"
+  },
+  {
+    id: "wps-ai",
+    name: "WPS AI",
+    nameEn: "WPS AI",
+    category: "office",
+    subcategory: "办公套件",
+    description: "金山办公推出的AI助手，集成在WPS Office中",
+    longDescription: `WPS AI是金山办公推出的AI助手，集成在WPS Office中，提供文档撰写、阅读理解、数据分析等AI能力，让办公更高效。
+
+**主要特点：**
+- 集成在WPS中
+- 文档撰写
+- 阅读理解
+- 数据分析
+- PPT生成
+
+**适用场景：**
+- 文档写作
+- 数据处理
+- 演示制作
+- 表格分析
+- 办公协作`,
+    features: ["文档撰写", "阅读理解", "PPT生成", "表格分析", "协作"],
+    pricing: "免费/付费",
+    pricingDetail: "会员专享部分功能",
+    pros: ["集成办公软件", "中文友好", "操作习惯一致", "会员可用"],
+    cons: ["部分功能需会员", "功能相对基础", "联网限制"],
+    website: "https://金山文档.com",
+    affiliateUrl: "https://affiliate.example.com/wps-ai",
+    logo: "https://www.wps.cn/favicon.ico",
+    tags: ["AI办公", "WPS", "文档", "办公软件"],
+    rating: 4.3,
+    visitCount: 36000,
+    createdAt: "2024-04-10"
+  },
+  {
+    id: "canva-ai",
+    name: "Canva AI",
+    nameEn: "Canva",
+    category: "image",
+    subcategory: "设计工具",
+    description: "包含AI功能的在线设计平台",
+    longDescription: `Canva是全球领先的在线设计平台，其AI功能包括Magic Write文案生成、Magic Design设计建议、Magic Eraser图片编辑等，让设计更简单。
+
+**主要特点：**
+- AI文案生成
+- 智能设计建议
+- 图片编辑
+- 海报生成
+- 团队协作
+
+**适用场景：**
+- 社交媒体设计
+- 海报制作
+- PPT设计
+- 品牌素材
+- 营销内容`,
+    features: ["AI文案", "设计模板", "图片编辑", "协作", "品牌套件"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版可用，Pro版月费12.99美元",
+    pros: ["模板丰富", "操作简单", "协作方便", "设计美观"],
+    cons: ["高级功能付费", "导出有限制", "创意有限"],
+    website: "https://www.canva.com",
+    affiliateUrl: "https://affiliate.example.com/canva",
+    logo: "https://www.canva.com/favicon.ico",
+    tags: ["AI设计", "设计工具", "Canva", "海报"],
+    rating: 4.6,
+    visitCount: 72000,
+    createdAt: "2024-04-15"
+  },
+  {
+    id: "copy-ai",
+    name: "Copy.ai",
+    nameEn: "Copy.ai",
+    category: "writing",
+    subcategory: "文案生成",
+    description: "AI文案生成工具，帮助快速创建营销内容",
+    longDescription: `Copy.ai是一款AI文案生成工具，专注于帮助用户快速生成营销文案、社交媒体内容、产品描述等商业写作任务。
+
+**主要特点：**
+- 多种文案模板
+- 多语言支持
+- 品牌声音定制
+- 批量生成
+- 协作功能
+
+**适用场景：**
+- 营销文案
+- 社交媒体
+- 产品描述
+- 邮件撰写
+- 广告创意`,
+    features: ["文案模板", "多语言", "品牌定制", "批量生成", "SEO优化"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版有额度，Pro版月费49美元",
+    pros: ["模板丰富", "生成快速", "多语言", "SEO友好"],
+    cons: ["价格较高", "内容重复", "需人工修改"],
+    website: "https://www.copy.ai",
+    affiliateUrl: "https://affiliate.example.com/copy-ai",
+    logo: "https://www.copy.ai/favicon.ico",
+    tags: ["AI写作", "文案", "营销", "Copy.ai"],
+    rating: 4.4,
+    visitCount: 28000,
+    createdAt: "2024-04-20"
+  },
+  {
+    id: "jasper",
+    name: "Jasper",
+    nameEn: "Jasper",
+    category: "writing",
+    subcategory: "AI写作",
+    description: "企业级AI内容创作平台",
+    longDescription: `Jasper是领先的AI内容创作平台，专为企业和营销团队设计，提供SEO优化、品牌一致性、多语言内容生成等功能。
+
+**主要特点：**
+- 品牌声音定制
+- SEO集成
+- 多语言内容
+- 团队协作
+- API接口
+
+**适用场景：**
+- 企业内容营销
+- 跨境电商
+- 内容工厂
+- 品牌运营
+- SEO优化`,
+    features: ["品牌定制", "SEO优化", "多语言", "API", "团队协作"],
+    pricing: "付费订阅",
+    pricingDetail: "Starter版月费49美元，Pro版月存49美元",
+    pros: ["企业级功能", "品牌一致性", "SEO优化", "支持多语言"],
+    cons: ["价格昂贵", "上手有门槛", "需要配置"],
+    website: "https://www.jasper.ai",
+    affiliateUrl: "https://affiliate.example.com/jasper",
+    logo: "https://www.jasper.ai/favicon.ico",
+    tags: ["AI写作", "企业", "营销", "Jasper"],
+    rating: 4.5,
+    visitCount: 31000,
+    createdAt: "2024-04-25"
+  },
+  {
+    id: "writesonic",
+    name: "Writesonic",
+    nameEn: "Writesonic",
+    category: "writing",
+    subcategory: "AI写作",
+    description: "AI写作助手，支持文章生成和SEO优化",
+    longDescription: `Writesonic是一款综合性AI写作工具，支持文章写作、博客内容、SEO优化内容、营销文案等多种类型的内容生成。
+
+**主要特点：**
+- 多类型内容生成
+- SEO优化建议
+- 文章重写
+- 图片生成集成
+- API支持
+
+**适用场景：**
+- 博客文章
+- SEO内容
+- 产品文案
+- 广告创意
+- 社交内容`,
+    features: ["文章生成", "SEO优化", "多类型", "图片生成", "API"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版有限，Pro版月费19美元",
+    pros: ["功能全面", "SEO友好", "价格适中", "生成质量好"],
+    cons: ["免费版限制多", "偶有重复", "需要审核"],
+    website: "https://writesonic.com",
+    affiliateUrl: "https://affiliate.example.com/writesonic",
+    logo: "https://writesonic.com/favicon.ico",
+    tags: ["AI写作", "SEO", "文章", "Writesonic"],
+    rating: 4.4,
+    visitCount: 26000,
+    createdAt: "2024-05-01"
+  },
+  {
+    id: "removal-ai",
+    name: "Remove.bg",
+    nameEn: "Remove.bg",
+    category: "image",
+    subcategory: "图片编辑",
+    description: "AI一键抠图工具",
+    longDescription: `Remove.bg是一款AI驱动的在线抠图工具，可以自动识别并移除图片背景，几秒钟内完成高质量的背景移除。
+
+**主要特点：**
+- 一键抠图
+- 边缘精细
+- API支持
+- 批量处理
+- 多种格式
+
+**适用场景：**
+- 电商产品图
+- 证件照处理
+- 营销素材
+- 人像处理
+- 设计素材`,
+    features: ["一键抠图", "边缘精细", "API", "批量", "格式多样"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版有限，高清版月费9美元",
+    pros: ["操作简单", "效果好", "速度快", "API可用"],
+    cons: ["免费版有限", "复杂图效果差", "隐私顾虑"],
+    website: "https://www.remove.bg",
+    affiliateUrl: "https://affiliate.example.com/remove-bg",
+    logo: "https://www.remove.bg/favicon.ico",
+    tags: ["AI图片", "抠图", "Remove.bg"],
+    rating: 4.7,
+    visitCount: 58000,
+    createdAt: "2024-05-05"
+  },
+  {
+    id: "voicemaker",
+    name: "Voicemaker",
+    nameEn: "Voicemaker",
+    category: "audio",
+    subcategory: "语音合成",
+    description: "AI文字转语音工具",
+    longDescription: `Voicemaker是一款AI文字转语音工具，提供多种语言和声音选择，可以将文本转换为自然流畅的语音输出。
+
+**主要特点：**
+- 多种声音选择
+- 多语言支持
+- 语速调节
+- 商用授权
+- 多种格式导出
+
+**适用场景：**
+- 视频配音
+- 有声书
+- 教育内容
+- 广告旁白
+- 语音导航`,
+    features: ["多声音", "多语言", "语速调节", "商用授权", "多格式"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版可用，付费版月费9美元起",
+    pros: ["声音自然", "选择多", "价格实惠", "商用可用"],
+    cons: ["免费版有水印", "情感表达有限", "需网络"],
+    website: "https://www.voicemaker.in",
+    affiliateUrl: "https://affiliate.example.com/voicemaker",
+    logo: "https://www.voicemaker.in/favicon.ico",
+    tags: ["AI音频", "语音合成", "TTS"],
+    rating: 4.5,
+    visitCount: 24000,
+    createdAt: "2024-05-10"
+  },
+  {
+    id: "otter",
+    name: "Otter",
+    nameEn: "Otter",
+    category: "audio",
+    subcategory: "语音转文字",
+    description: "AI会议记录和语音转文字工具",
+    longDescription: `Otter是一款AI驱动的会议记录工具，能够实时转录语音、识别说话人、自动生成会议摘要，提高会议效率。
+
+**主要特点：**
+- 实时转录
+- 说话人识别
+- 自动摘要
+- 关键词高亮
+- 协作标注
+
+**适用场景：**
+- 会议记录
+- 访谈整理
+- 课堂笔记
+- 电话记录
+- 远程会议`,
+    features: ["实时转录", "说话人识别", "自动摘要", "关键词", "协作"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版每月300分钟，Pro版月费20美元",
+    pros: ["转录准确", "实时同步", "自动摘要", "协作方便"],
+    cons: ["免费版时间少", "依赖网络", "英文效果更好"],
+    website: "https://otter.ai",
+    affiliateUrl: "https://affiliate.example.com/otter",
+    logo: "https://otter.ai/favicon.ico",
+    tags: ["AI音频", "转录", "会议", "Otter"],
+    rating: 4.6,
+    visitCount: 32000,
+    createdAt: "2024-05-15"
+  },
+  {
+    id: "photomath",
+    name: "Photomath",
+    nameEn: "Photomath",
+    category: "research",
+    subcategory: "AI学习",
+    description: "AI数学解题助手",
+    longDescription: `Photomath是一款AI数学学习应用，通过拍照识别数学题并给出详细解题步骤，帮助学生理解数学概念。
+
+**主要特点：**
+- 拍照识别题目
+- 分步解题
+- 多种解法
+- 动画演示
+- 学习记录
+
+**适用场景：**
+- 数学作业
+- 考试准备
+- 自学辅导
+- 家长检查
+- 课堂教学`,
+    features: ["拍照识别", "分步解题", "多解法", "动画演示", "学习记录"],
+    pricing: "免费/付费",
+    pricingDetail: "基础版免费，Plus版月费9.99美元",
+    pros: ["解题准确", "讲解详细", "学习友好", "覆盖广"],
+    cons: ["高等数学有限", "付费功能多", "需拍照"],
+    website: "https://photomath.com",
+    affiliateUrl: "https://affiliate.example.com/photomath",
+    logo: "https://photomath.com/favicon.ico",
+    tags: ["AI教育", "数学", "学习", "Photomath"],
+    rating: 4.8,
+    visitCount: 45000,
+    createdAt: "2024-05-20"
+  },
+  {
+    id: "grammarly",
+    name: "Grammarly",
+    nameEn: "Grammarly",
+    category: "writing",
+    subcategory: "语法检查",
+    description: "AI英语语法检查和写作辅助工具",
+    longDescription: `Grammarly是一款AI驱动的英语写作辅助工具，提供语法检查、拼写纠正、标点修正、风格建议等功能，帮助用户提升英文写作质量。
+
+**主要特点：**
+- 实时语法检查
+- 风格建议
+- 语气调整
+- 抄袭检测
+- 多平台集成
+
+**适用场景：**
+- 英语写作
+- 论文润色
+- 邮件检查
+- 商务沟通
+- 留学申请`,
+    features: ["语法检查", "拼写纠正", "风格建议", "语气调整", "抄袭检测"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版基础功能，Premium版月费12美元",
+    pros: ["检查准确", "功能全面", "集成广泛", "学习功能"],
+    cons: ["高级功能付费", "主要针对英文", "需联网"],
+    website: "https://www.grammarly.com",
+    affiliateUrl: "https://affiliate.example.com/grammarly",
+    logo: "https://www.grammarly.com/favicon.ico",
+    tags: ["AI写作", "语法检查", "英语", "Grammarly"],
+    rating: 4.7,
+    visitCount: 68000,
+    createdAt: "2024-05-25"
+  },
+  {
+    id: "leonardo",
+    name: "Leonardo.ai",
+    nameEn: "Leonardo.ai",
+    category: "image",
+    subcategory: "AI绘画",
+    description: "AI游戏美术生成平台",
+    longDescription: `Leonardo.ai是一款专注于游戏和创意领域的AI图像生成平台，提供独特的模型和风格，特别适合生成游戏资产、角色设计、场景概念等。
+
+**主要特点：**
+- 游戏美术模型
+- 角色设计
+- 风格定制
+- 社区分享
+- 商用授权
+
+**适用场景：**
+- 游戏美术
+- 角色设计
+- 场景概念
+- 素材生成
+- 创意设计`,
+    features: ["游戏美术", "角色设计", "风格定制", "社区", "商用授权"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版每日150 tokens，付费版月费12美元起",
+    pros: ["游戏美术专业", "质量高", "社区活跃", "可商用"],
+    cons: ["免费版有限", "界面复杂", "生成较慢"],
+    website: "https://leonardo.ai",
+    affiliateUrl: "https://affiliate.example.com/leonardo",
+    logo: "https://leonardo.ai/favicon.ico",
+    tags: ["AI绘画", "游戏", "Leonardo", "角色设计"],
+    rating: 4.6,
+    visitCount: 39000,
+    createdAt: "2024-06-01"
+  },
+  {
+    id: "adesk",
+    name: "Adskier",
+    nameEn: "Adskier",
+    category: "research",
+    subcategory: "AI广告",
+    description: "AI广告文案和素材生成工具",
+    longDescription: `Adskier是一款专注于广告创意的AI工具，帮助营销人员快速生成广告文案、图片和视频素材，提升广告制作效率。
+
+**主要特点：**
+- 广告文案生成
+- 图片素材生成
+- 多平台适配
+- A/B测试建议
+- 数据分析
+
+**适用场景：**
+- 数字广告
+- 社交媒体广告
+- 搜索广告
+- 电商广告
+- 品牌营销`,
+    features: ["文案生成", "素材生成", "多平台", "A/B测试", "数据分析"],
+    pricing: "免费/付费",
+    pricingDetail: "免费试用，付费版月费29美元起",
+    pros: ["广告优化", "多平台", "效率提升", "数据分析"],
+    cons: ["需付费", "学习成本", "效果依赖输入"],
+    website: "https://adskier.io",
+    affiliateUrl: "https://affiliate.example.com/adskier",
+    logo: "https://adskier.io/favicon.ico",
+    tags: ["AI广告", "营销", "素材生成"],
+    rating: 4.3,
+    visitCount: 18000,
+    createdAt: "2024-06-05"
+  },
+  {
+    id: "tabnine",
+    name: "Tabnine",
+    nameEn: "Tabnine",
+    category: "coding",
+    subcategory: "AI编程",
+    description: "AI代码补全工具，支持私有化部署",
+    longDescription: `Tabnine是一款AI代码补全工具，支持多种编程语言和IDE，提供个人版和团队版，团队版支持私有化部署保护代码隐私。
+
+**主要特点：**
+- 多语言支持
+- 多IDE集成
+- 私有化部署
+- 代码隐私保护
+- 团队协作
+
+**适用场景：**
+- 日常编码
+- 企业开发
+- 代码隐私
+- 团队协作
+- 特定领域模型`,
+    features: ["代码补全", "私有部署", "多语言", "团队版", "隐私保护"],
+    pricing: "免费/付费",
+    pricingDetail: "免费版基础功能，Pro版月费12美元",
+    pros: ["代码隐私好", "私有部署", "老牌稳定", "多语言"],
+    cons: ["功能相对基础", "AI能力不如Copilot", "免费版限制"],
+    website: "https://www.tabnine.com",
+    affiliateUrl: "https://affiliate.example.com/tabnine",
+    logo: "https://www.tabnine.com/favicon.ico",
+    tags: ["AI编程", "代码补全", "Tabnine"],
+    rating: 4.4,
+    visitCount: 25000,
+    createdAt: "2024-06-10"
+  },
+  {
+    id: "codeium",
+    name: "Codeium",
+    nameEn: "Codeium",
+    category: "coding",
+    subcategory: "AI编程",
+    description: "免费的AI代码补全工具",
+    longDescription: `Codeium是一款免费的AI代码补全工具，目标是让每个开发者都能使用AI编程，提供个人版免费使用，支持多种语言和IDE。
+
+**主要特点：**
+- 完全免费
+- 多语言支持
+- 多IDE集成
+- 快速响应
+- 持续更新
+
+**适用场景：**
+- 个人开发
+- 学习编程
+- 小团队
+- 快速原型
+- 开源项目`,
+    features: ["免费", "代码补全", "多语言", "多IDE", "快速"],
+    pricing: "免费",
+    pricingDetail: "个人使用完全免费",
+    pros: ["完全免费", "功能全面", "安装简单", "无限制"],
+    cons: ["企业版需付费", "代码质量一般", "社区不如Copilot"],
+    website: "https://codeium.com",
+    affiliateUrl: "https://affiliate.example.com/codeium",
+    logo: "https://codeium.com/favicon.ico",
+    tags: ["AI编程", "免费", "代码补全", "Codeium"],
+    rating: 4.5,
+    visitCount: 38000,
+    createdAt: "2024-06-15"
+  },
+  {
+    id: "deepsEEK",
+    name: "DeepSeek",
+    nameEn: "DeepSeek",
+    category: "chatbot",
+    subcategory: "大语言模型",
+    description: "深度求索开发的开源大语言模型",
+    longDescription: `DeepSeek是由深度求索公司开发的开源大语言模型，拥有强大的推理能力和代码生成能力，其DeepSeek-Coder和DeepSeekMath在各自领域表现优异。
+
+**主要特点：**
+- 开源可商用
+- 推理能力强
+- 代码能力出色
+- 数学能力强
+- API价格低
+
+**适用场景：**
+- 代码开发
+- 数学推理
+- 学术研究
+- 企业应用
+- 成本敏感项目`,
+    features: ["开源", "代码强", "推理强", "数学强", "低价API"],
+    pricing: "免费/付费",
+    pricingDetail: "开源免费，API按量付费价格低廉",
+    pros: ["开源免费", "代码能力强", "API便宜", "持续开源"],
+    cons: ["生态较新", "中文略弱", "长文本有限"],
+    website: "https://www.deepseek.com",
+    affiliateUrl: "https://affiliate.example.com/deepseek",
+    logo: "https://www.deepseek.com/favicon.ico",
+    tags: ["AI对话", "开源", "代码", "DeepSeek"],
+    rating: 4.7,
+    visitCount: 55000,
+    createdAt: "2024-06-20"
+  }
+];
+
+// 更新分类计数
+categories.forEach(cat => {
+  cat.count = aiTools.filter(tool => tool.category === cat.id).length;
+});
+
+export function getToolById(id: string): AITool | undefined {
+  return aiTools.find(tool => tool.id === id);
+}
+
+export function getToolsByCategory(categoryId: string): AITool[] {
+  return aiTools.filter(tool => tool.category === categoryId);
+}
+
+export function getCategoryById(id: string): Category | undefined {
+  return categories.find(cat => cat.id === id);
+}
+
+export function searchTools(query: string): AITool[] {
+  const lowerQuery = query.toLowerCase();
+  return aiTools.filter(tool => 
+    tool.name.toLowerCase().includes(lowerQuery) ||
+    tool.description.toLowerCase().includes(lowerQuery) ||
+    tool.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+  );
+}
