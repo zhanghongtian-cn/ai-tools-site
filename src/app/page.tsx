@@ -5,6 +5,7 @@ import { Hero } from '@/components/Hero';
 import { CategoryGrid } from '@/components/CategoryGrid';
 import { ToolCard } from '@/components/ToolCard';
 import { BlogCard } from '@/components/BlogCard';
+import { AdBanner } from '@/components/AdBanner';
 
 export default function Home() {
   const featuredTools = aiTools.slice(0, 8);
@@ -49,13 +50,10 @@ export default function Home() {
         </div>
       </section>
       
-      {/* 广告位1 */}
-      <section className="py-8">
+      {/* 广告位1 - 顶部横幅 */}
+      <section className="py-8 bg-slate-50">
         <div className="container">
-          <div className="ad-placeholder">
-            <p>📢 广告位 - Google AdSense / Affiliate广告</p>
-            <p className="text-xs mt-2">尺寸: 728x90 (桌面端) / 320x100 (移动端)</p>
-          </div>
+          <AdBanner type="banner" />
         </div>
       </section>
       
@@ -102,10 +100,7 @@ export default function Home() {
       {/* 广告位2 */}
       <section className="py-8">
         <div className="container">
-          <div className="ad-placeholder">
-            <p>📢 广告位 - 工具对比/测评广告</p>
-            <p className="text-xs mt-2">尺寸: 728x90 (桌面端) / 320x100 (移动端)</p>
-          </div>
+          <AdBanner type="banner" />
         </div>
       </section>
       

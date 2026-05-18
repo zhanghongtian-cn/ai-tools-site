@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getToolById, getCategoryById, aiTools } from '@/data/tools';
+import { AdBanner, AdInArticle } from '@/components/AdBanner';
 import type { Metadata } from 'next';
 
 interface PageProps {
@@ -56,6 +57,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
     audio: 'AI音频',
     research: 'AI研究',
   };
+
+  // 判断是否使用affiliate链接
+  const affiliateLink = tool.affiliateUrl || tool.website;
 
   // JSON-LD结构化数据
   const jsonLd = {
@@ -117,6 +121,11 @@ export default async function ToolDetailPage({ params }: PageProps) {
                     <div className="flex items-center gap-3 mb-2">
                       <h1 className="text-2xl font-bold">{tool.name}</h1>
                       <span className="tag">{categoryLabels[tool.category]}</span>
+                      {tool.affiliateUrl && (
+                        <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                         Affiliate
+                        </span>
+                      )}
                     </div>
                     <p className="text-slate-600">{tool.description}</p>
                   </div>
@@ -141,12 +150,12 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 {/* Affiliate按钮 - 变现模块 */}
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href={tool.affiliateUrl || tool.website} 
+                    href={affiliateLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn-primary"
                   >
-                    🚀 前往官网
+                    {tool.affiliateUrl ? '🔗 前往官网（ Affiliate链接）' : '🚀 前往官网'}
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -172,6 +181,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
                   })}
                 </div>
               </div>
+
+              {/* 广告位 - 内容中间 */}
+              <AdInArticle position="middle" />
 
               {/* 功能特点 */}
               <div className="card mb-6">
@@ -231,10 +243,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
             {/* 右侧边栏 */}
             <div className="lg:col-span-1">
               {/* 广告位 */}
-              <div className="ad-placeholder mb-6">
-                <p>📢 广告位</p>
-                <p className="text-xs mt-1">300x250</p>
-              </div>
+              <AdBanner type="sidebar" />
 
               {/* 定价信息 */}
               <div className="card mb-6">
@@ -244,12 +253,12 @@ export default async function ToolDetailPage({ params }: PageProps) {
                   <p className="text-sm text-slate-600 mt-2">{tool.pricingDetail}</p>
                 </div>
                 <a 
-                  href={tool.affiliateUrl || tool.website} 
+                  href={affiliateLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn-primary w-full justify-center mt-4"
                 >
-                  立即开始使用
+                  {tool.affiliateUrl ? '🔗 使用 Affiliate 链接' : '立即开始使用'}
                 </a>
               </div>
 

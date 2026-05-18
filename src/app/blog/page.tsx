@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { blogPosts } from '@/data/blogs';
 import { BlogCard } from '@/components/BlogCard';
+import { AdBanner } from '@/components/AdBanner';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -40,16 +41,19 @@ export default function BlogPage() {
       </section>
 
       {/* 广告位 */}
-      <section className="py-4">
+      <section className="py-4 bg-slate-50">
         <div className="container">
-          <div className="ad-placeholder py-4">
-            <p>📢 广告位 - 728x90</p>
-          </div>
+          <AdBanner type="banner" />
         </div>
       </section>
 
       <section className="py-8">
         <div className="container">
+          <div className="mb-6">
+            <p className="text-slate-600">
+              共 <span className="font-semibold text-indigo-600">{blogPosts.length}</span> 篇文章
+            </p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <BlogCard key={post.id} post={post} />

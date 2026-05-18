@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { categories, aiTools, searchTools, getToolsByCategory } from '@/data/tools';
 import { ToolCard } from '@/components/ToolCard';
+import { AdBanner } from '@/components/AdBanner';
 
 function ToolsContent() {
   const searchParams = useSearchParams();
@@ -93,12 +94,10 @@ function ToolsContent() {
         </div>
       </section>
 
-      {/* 广告位 */}
-      <section className="py-4">
+      {/* 广告位 - 顶部横幅 */}
+      <section className="py-4 bg-slate-50">
         <div className="container">
-          <div className="ad-placeholder py-4">
-            <p>📢 广告位 - 728x90</p>
-          </div>
+          <AdBanner type="banner" />
         </div>
       </section>
 

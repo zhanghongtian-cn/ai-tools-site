@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getPostBySlug, blogPosts, getRecentPosts } from '@/data/blogs';
+import { AdBanner, AdInArticle } from '@/components/AdBanner';
 import type { Metadata } from 'next';
 
 interface PageProps {
@@ -118,10 +119,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                {/* 广告位 */}
-                <div className="ad-placeholder mb-6 py-4">
-                  <p>📢 文章内广告位 - 728x90</p>
-                </div>
+                {/* 广告位 - 文章顶部 */}
+                <AdInArticle position="top" />
 
                 {/* 文章内容 */}
                 <div className="prose max-w-none">
@@ -185,6 +184,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                   })}
                 </div>
 
+                {/* 广告位 - 文章中间 */}
+                <AdInArticle position="middle" />
+
                 {/* 标签 */}
                 <div className="mt-8 pt-6 border-t">
                   <div className="flex flex-wrap gap-2">
@@ -198,6 +200,11 @@ export default async function BlogPostPage({ params }: PageProps) {
                       </Link>
                     ))}
                   </div>
+                </div>
+
+                {/* 广告位 - 文章底部 */}
+                <div className="mt-6">
+                  <AdInArticle position="bottom" />
                 </div>
               </article>
 
@@ -221,10 +228,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* 侧边栏 */}
             <div className="lg:col-span-1">
               {/* 广告位 */}
-              <div className="ad-placeholder mb-6">
-                <p>📢 广告位</p>
-                <p className="text-xs mt-1">300x250</p>
-              </div>
+              <AdBanner type="sidebar" />
 
               {/* 订阅 */}
               <div className="card mb-6 bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
