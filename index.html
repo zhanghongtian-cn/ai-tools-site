@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="派搜AI - 发现最实用的AI工具，收录30+顶级AI工具">
+    <meta name="keywords" content="AI工具,人工智能,AI导航,ChatGPT,Claude,Midjourney">
+    <title>派搜AI - 发现最实用的AI工具</title>
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#fff;--bg2:#f8fafc;--bg3:#f1f5f9;--text:#1e293b;--text2:#64748b;--text3:#94a3b8;--accent:#4f46e5;--accent2:#818cf8;--accentbg:#eef2ff;--border:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,.1);--shadow2:0 10px 15px -3px rgba(0,0,0,.1)}
+        [data-theme=dark]{--bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--accent:#818cf8;--accent2:#a5b4fc;--accentbg:#1e1b4b;--border:#334155;--shadow:0 1px 3px rgba(0,0,0,.3);--shadow2:0 10px 15px -3px rgba(0,0,0,.4)}
+        html{-webkit-font-smoothing:antialiased}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;transition:.3s}
+        a{color:inherit;text-decoration:none}
+        button{font-family:inherit;cursor:pointer;border:none;background:none}
+        .container{max-width:1400px;margin:0 auto;padding:0 1rem}
+        .header{background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
+        .logo{display:flex;align-items:center;gap:.75rem}
+        .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#4f46e5,#818cf8);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.25rem}
+        .logo-title{font-size:1.25rem;font-weight:700}
+        .logo-sub{font-size:.75rem;color:var(--text2)}
+        .theme-btn{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--bg3);color:var(--text);transition:.2s}
+        .theme-btn:hover{background:var(--accentbg);color:var(--accent)}
+        .theme-btn svg{width:20px;height:20px}
+        .mobile-cats{display:none;padding:.75rem 0;overflow-x:auto;gap:.5rem;scrollbar-width:none}
+        .mobile-cats::-webkit-scrollbar{display:none}
+        .mobile-cat{flex-shrink:0;padding:.5rem 1rem;border-radius:20px;font-size:.875rem;background:var(--bg3);color:var(--text2);transition:.2s}
+        .mobile-cat.active{background:var(--accent);color:#fff}
+        .hero{background:var(--bg2);padding:2.5rem 0;text-align:center}
+        .search-box{max-width:640px;margin:0 auto 1.5rem;position:relative}
+        .search-input{width:100%;padding:1rem 1.25rem 1rem 3.25rem;font-size:1rem;border:2px solid var(--border);border-radius:16px;background:var(--bg);color:var(--text);outline:none;transition:.2s;box-shadow:var(--shadow)}
+        .search-input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accentbg),var(--shadow2)}
+        .search-input::placeholder{color:var(--text3)}
+        .search-icon{position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);color:var(--text3);width:20px;height:20px}
+        .hot-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+        .hot-tag{padding:.375rem .875rem;font-size:.8125rem;color:var(--text2);background:var(--bg3);border-radius:20px;transition:.2s}
+        .hot-tag:hover{color:var(--accent);background:var(--accentbg)}
+        .stats{display:flex;justify-content:center;gap:2rem;padding:1.5rem 0;flex-wrap:wrap}
+        .stat{display:flex;align-items:center;gap:.5rem;color:var(--text2);font-size:.875rem}
+        .stat svg{width:18px;height:18px;color:var(--accent)}
+        .stat span{font-weight:600;color:var(--text)}
+        .main{padding:1.5rem 0 3rem}
+        .main-layout{display:flex;gap:2rem}
+        .sidebar{width:260px;flex-shrink:0;position:sticky;top:85px;height:fit-content;max-height:calc(100vh - 100px);overflow-y:auto}
+        .cat-list{display:flex;flex-direction:column;gap:.25rem}
+        .cat-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border-radius:10px;color:var(--text2);transition:.2s;cursor:pointer;position:relative}
+        .cat-item:hover{background:var(--bg3);color:var(--text)}
+        .cat-item.active{background:var(--accentbg);color:var(--accent)}
+        .cat-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:24px;background:var(--accent);border-radius:0 2px 2px 0}
+        .cat-emoji{font-size:1.125rem;width:24px;text-align:center}
+        .cat-name{flex:1;font-size:.9375rem;font-weight:500}
+        .cat-count{font-size:.75rem;padding:.125rem .5rem;background:var(--bg3);border-radius:10px;color:var(--text3)}
+        .cat-item.active .cat-count{background:var(--accent);color:#fff}
+        .content{flex:1;min-width:0}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+        .card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:.2s;display:flex;flex-direction:column;gap:.75rem}
+        .card:hover{transform:translateY(-2px);box-shadow:var(--shadow2);border-color:var(--accent)}
+        .card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+        .card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.125rem;flex-shrink:0}
+        .card-info{flex:1;min-width:0}
+        .card-name{font-size:1rem;font-weight:600;margin-bottom:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .card-rating{color:#f59e0b;font-size:.8125rem}
+        .card-desc{font-size:.875rem;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:.5rem}
+        .card-tag{padding:.25rem .625rem;font-size:.6875rem;border-radius:6px;background:var(--bg3);color:var(--text2)}
+        .price-tag{padding:.25rem .625rem;font-size:.6875rem;border-radius:6px;font-weight:500}
+        .price-free{background:#dcfce7;color:#16a34a}
+        [data-theme=dark] .price-free{background:#14532d;color:#4ade80}
+        .price-paid{background:#fef3c7;color:#d97706}
+        [data-theme=dark] .price-paid{background:#78350f;color:#fbbf24}
+        .price-mixed{background:#e0e7ff;color:#4f46e5}
+        [data-theme=dark] .price-mixed{background:#312e81;color:#a5b4fc}
+        .empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--text3)}
+        .empty h3{font-size:1.125rem;font-weight:600;color:var(--text2);margin:.5rem 0}
+        .footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 0;text-align:center}
+        .footer-content{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+        .footer-text{font-size:.875rem;color:var(--text3)}
+        .footer-links{display:flex;gap:1.5rem}
+        .footer-link{font-size:.875rem;color:var(--text2);transition:.2s}
+        .footer-link:hover{color:var(--accent)}
+        @media(max-width:768px){.mobile-cats{display:flex}.sidebar{display:none}.main-layout{flex-direction:column}.grid{grid-template-columns:1fr}.hero{padding:1.5rem 0}.logo-sub{display:none}}
+        @media(max-width:480px){.container{padding:0 .75rem}.search-input{padding:.875rem 1rem .875rem 2.75rem}.card{padding:1rem}.card-icon{width:40px;height:40px;font-size:1rem}.footer-content{flex-direction:column;gap:.75rem}}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <div class="logo-icon">派</div>
+                    <div class="logo-text"><span class="logo-title">派搜AI</span><span class="logo-sub">发现最实用的AI工具</span></div>
+                </a>
+                <button class="theme-btn" id="themeBtn" aria-label="切换主题">
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+            <div class="mobile-cats" id="mobileCats"></div>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="search-input" id="searchInput" placeholder="搜索AI工具，如 ChatGPT、Midjourney...">
+            </div>
+            <div class="hot-tags">
+                <button class="hot-tag" data-s="ChatGPT">ChatGPT</button>
+                <button class="hot-tag" data-s="Claude">Claude</button>
+                <button class="hot-tag" data-s="Midjourney">Midjourney</button>
+                <button class="hot-tag" data-s="AI绘画">AI绘画</button>
+                <button class="hot-tag" data-s="AI编程">AI编程</button>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="stats">
+            <div class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg><span id="tCount">30+</span><span>收录工具</span></div>
+            <div class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg><span id="cCount">8</span><span>工具分类</span></div>
+            <div class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span>100%</span><span>免费查阅</span></div>
+        </div>
+    </section>
+    <main class="main">
+        <div class="container">
+            <div class="main-layout">
+                <aside class="sidebar"><nav class="cat-list" id="catList"></nav></aside>
+                <section class="content"><div class="grid" id="grid"></div></section>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <span class="footer-text">© 2026 派搜AI</span>
+                <div class="footer-links"><a href="#" class="footer-link">关于我们</a><a href="#" class="footer-link">隐私政策</a></div>
+            </div>
+        </div>
+    </footer>
+    <script>
+const tools=[{n:"ChatGPT",c:"ai-chat",d:"OpenAI开发的AI对话助手，支持多轮对话、代码生成、内容创作",r:4.9,p:"免费/付费",u:"https://chat.openai.com",co:"#10a37f"},{n:"Claude",c:"ai-chat",d:"Anthropic开发的AI助手，以安全性和长文本处理能力著称，支持200K上下文",r:4.8,p:"免费/付费",u:"https://claude.ai",co:"#d97757"},{n:"Gemini",c:"ai-chat",d:"Google推出的多模态AI助手，深度集成Google生态",r:4.6,p:"免费/付费",u:"https://gemini.google.com",co:"#4285f4"},{n:"文心一言",c:"ai-chat",d:"百度出品的中文AI助手，深度理解中文语境",r:4.5,p:"免费/付费",u:"https://yiyan.baidu.com",co:"#2932e1"},{n:"通义千问",c:"ai-chat",d:"阿里云推出的大模型AI助手，中文能力突出",r:4.5,p:"免费",u:"https://tongyi.aliyun.com",co:"#ff6a00"},{n:"Jasper",c:"ai-writing",d:"专业的AI写作工具，支持营销文案、博客文章等多种内容生成",r:4.6,p:"付费",u:"https://www.jasper.ai",co:"#ff5733"},{n:"Copy.ai",c:"ai-writing",d:"AI文案生成工具，快速创建营销文案、社交媒体内容",r:4.4,p:"免费/付费",u:"https://www.copy.ai",co:"#7c3aed"},{n:"Notion AI",c:"ai-office",d:"Notion内置的AI功能，帮助用户更高效地写作、总结和整理信息",r:4.8,p:"免费/付费",u:"https://www.notion.so",co:"#000000"},{n:"Grammarly",c:"ai-writing",d:"AI语法检查和写作增强工具，支持中英文",r:4.7,p:"免费/付费",u:"https://www.grammarly.com",co:"#15c39a"},{n:"Midjourney",c:"ai-art",d:"强大的AI图像生成工具，以艺术风格见长，生成图像质量极高",r:4.8,p:"付费",u:"https://www.midjourney.com",co:"#0f1014"},{n:"Stable Diffusion",c:"ai-art",d:"开源免费的高质量AI图像生成模型，支持本地部署和自定义训练",r:4.7,p:"免费",u:"https://stability.ai",co:"#7c3aed"},{n:"DALL-E",c:"ai-art",d:"OpenAI开发的AI图像生成器，支持图像编辑和变体生成",r:4.6,p:"积分制",u:"https://openai.com/dall-e",co:"#10a37f"},{n:"Canva AI",c:"ai-art",d:"Canva内置AI设计工具，支持智能排版、背景移除、图像生成",r:4.5,p:"免费/付费",u:"https://www.canva.com",co:"#00c4cc"},{n:"Cursor",c:"ai-code",d:"AI代码编辑器，专注提升编程效率，支持对话式编程和多文件编辑",r:4.8,p:"免费/付费",u:"https://cursor.sh",co:"#7c3aed"},{n:"GitHub Copilot",c:"ai-code",d:"微软和GitHub联合开发的AI编程助手，与VS Code完美集成",r:4.7,p:"付费订阅",u:"https://github.com/features/copilot",co:"#24292e"},{n:"Replit",c:"ai-code",d:"在线AI编程平台，支持多种语言，内置AI编程助手Ghostwriter",r:4.5,p:"免费/付费",u:"https://replit.com",co:"#f26207"},{n:"Codeium",c:"ai-code",d:"免费AI代码补全工具，支持70+编程语言和40+IDE",r:4.5,p:"免费",u:"https://codeium.com",co:"#09b6a2"},{n:"Runway",c:"ai-video",d:"AI视频生成和编辑工具，支持文本生成视频、视频风格转换",r:4.6,p:"免费/付费",u:"https://runwayml.com",co:"#00d4aa"},{n:"Pika",c:"ai-video",d:"AI视频生成工具，支持文本和图片生成视频，操作简单",r:4.4,p:"免费/付费",u:"https://pika.art",co:"#6366f1"},{n:"Suno",c:"ai-audio",d:"AI音乐生成工具，输入文字即可创作完整歌曲",r:4.7,p:"免费/付费",u:"https://suno.com",co:"#1a1a2e"},{n:"ElevenLabs",c:"ai-audio",d:"AI语音合成和克隆工具，生成自然逼真的人声",r:4.6,p:"免费/付费",u:"https://elevenlabs.io",co:"#000000"},{n:"Perplexity",c:"ai-research",d:"AI搜索引擎，提供带来源引用的精准答案，研究利器",r:4.7,p:"免费/付费",u:"https://www.perplexity.ai",co:"#20b8cd"},{n:"Semantic Scholar",c:"ai-research",d:"AI驱动的学术搜索引擎，帮助研究人员快速找到相关论文",r:4.5,p:"免费",u:"https://www.semanticscholar.org",co:"#1857b6"},{n:"Semrush",c:"ai-office",d:"AI驱动的数字营销和SEO工具，帮助提升网站流量",r:4.5,p:"付费",u:"https://www.semrush.com",co:"#ff642d"},{n:"Gamma",c:"ai-office",d:"AI演示文稿生成工具，输入主题自动生成精美PPT",r:4.4,p:"免费/付费",u:"https://gamma.app",co:"#8b5cf6"},{n:"Kimi",c:"ai-chat",d:"月之暗面推出的AI助手，支持超长文本输入和分析",r:4.6,p:"免费",u:"https://kimi.moonshot.cn",co:"#6366f1"},{n:"豆包",c:"ai-chat",d:"字节跳动推出的AI助手，擅长中文对话和内容创作",r:4.5,p:"免费",u:"https://www.doubao.com",co:"#325eff"},{n:"即梦AI",c:"ai-art",d:"字节跳动推出的AI图像生成工具，支持中文提示词",r:4.4,p:"免费/付费",u:"https://jimeng.jianying.com",co:"#ff4757"},{n:"通义万相",c:"ai-art",d:"阿里云AI图像生成工具，支持文生图、图生图",r:4.3,p:"免费",u:"https://tongyi.aliyun.com/wanxiang",co:"#ff6a00"},{n:"Writesonic",c:"ai-writing",d:"AI写作助手，支持文章、广告文案、产品描述等多种内容",r:4.4,p:"免费/付费",u:"https://writesonic.com",co:"#6c5ce7"}];
+const cats=[{i:"all",n:"全部工具",e:"🔍"},{i:"ai-chat",n:"AI对话",e:"💬"},{i:"ai-writing",n:"AI写作",e:"✍️"},{i:"ai-art",n:"AI绘画",e:"🎨"},{i:"ai-code",n:"AI编程",e:"💻"},{i:"ai-video",n:"AI视频",e:"🎬"},{i:"ai-audio",n:"AI音频",e:"🎵"},{i:"ai-office",n:"AI办公",e:"📊"},{i:"ai-research",n:"AI研究",e:"🔬"}];
+let curCat='all',query='';
+const $=(s)=>document.querySelector(s);
+const $$=(s)=>document.querySelectorAll(s);
+function init(){
+    $('#tCount').textContent=tools.length+'+';
+    $('#cCount').textContent=cats.length-1;
+    const saved=localStorage.getItem('t')||'light';
+    document.documentElement.setAttribute('data-theme',saved);
+    updateIcon(saved);
+    renderCats();
+    renderMCats();
+    renderTools();
+    setupEvents();
+}
+function toggleTheme(){
+    const cur=document.documentElement.getAttribute('data-theme');
+    const n=cur==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    localStorage.setItem('t',n);
+    updateIcon(n);
+}
+function updateIcon(t){
+    $('.sun').style.display=t==='dark'?'none':'block';
+    $('.moon').style.display=t==='dark'?'block':'none';
+}
+function renderCats(){
+    $('#catList').innerHTML=cats.map(c=>`<div class="cat-item ${c.i===curCat?'active':''}" data-cat="${c.i}"><span class="cat-emoji">${c.e}</span><span class="cat-name">${c.n}</span><span class="cat-count">${c.i==='all'?tools.length:tools.filter(t=>t.c===c.i).length}</span></div>`).join('');
+}
+function renderMCats(){
+    $('#mobileCats').innerHTML=cats.map(c=>`<button class="mobile-cat ${c.i===curCat?'active':''}" data-cat="${c.i}">${c.e} ${c.n} ${c.i==='all'?tools.length:tools.filter(t=>t.c===c.i).length}</button>`).join('');
+}
+function getCatName(id){const c=cats.find(x=>x.i===id);return c?c.n:id;}
+function getPriceClass(p){if(p.includes('免费')&&p.includes('付费'))return'mixed';if(p.includes('免费'))return'free';return'paid';}
+function adjustColor(c,p){const n=parseInt(c.replace('#',''),16);const a=Math.round(2.55*p);const R=(n>>16)+a;const G=(n>>8&0x00FF)+a;const B=(n&0x0000FF)+a;return'#'+(0x1000000+(R<255?R<1?0:R:255)*0x10000+(G<255?G<1?0:G:255)*0x100+(B<255?B<1?0:B:255)).toString(16).slice(1);}
+function renderTools(){
+    const f=tools.filter(t=>{const mC=curCat==='all'||t.c===curCat;const mS=query===''||t.n.toLowerCase().includes(query.toLowerCase())||t.d.toLowerCase().includes(query.toLowerCase());return mC&&mS;});
+    if(f.length===0){$('#grid').innerHTML='<div class="empty"><h3>未找到相关工具</h3><p>试试其他关键词或分类</p></div>';return;}
+    $('#grid').innerHTML=f.map(t=>`<a href="${t.u}" target="_blank" class="card"><div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,${t.co},${adjustColor(t.co,20)})">${t.n.charAt(0)}</div><div class="card-info"><div class="card-name">${t.n}</div><span class="card-rating">⭐ ${t.r}</span></div></div><p class="card-desc">${t.d}</p><div class="card-footer"><span class="card-tag">${getCatName(t.c)}</span><span class="price-tag price-${getPriceClass(t.p)}">${t.p}</span></div></a>`).join('');
+}
+function setupEvents(){
+    $('#themeBtn').addEventListener('click',toggleTheme);
+    $('#catList').addEventListener('click',e=>{const i=e.target.closest('.cat-item');if(i){curCat=i.dataset.cat;renderCats();renderMCats();renderTools()}});
+    $('#mobileCats').addEventListener('click',e=>{const b=e.target.closest('.mobile-cat');if(b){curCat=b.dataset.cat;renderCats();renderMCats();renderTools()}});
+    $('#searchInput').addEventListener('input',e=>{query=e.target.value.trim();renderTools()});
+    $$('.hot-tag').forEach(t=>t.addEventListener('click',()=>{$('#searchInput').value=t.dataset.s;query=t.dataset.s;renderTools()}));
+}
+document.addEventListener('DOMContentLoaded',init);
+    </script>
+</body>
+</html>
