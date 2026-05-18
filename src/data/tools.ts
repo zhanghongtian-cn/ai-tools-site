@@ -32,6 +32,8 @@ export interface BlogPost {
   publishedAt: string;
   updatedAt: string;
   coverImage: string;
+  coverGradient?: string;
+  coverEmoji?: string;
   readingTime: number;
   featured: boolean;
 }

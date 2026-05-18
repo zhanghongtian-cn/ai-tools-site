@@ -8,6 +8,17 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+// 根据文章分类生成默认渐变色
+function getCategoryGradient(category: string): { gradient: string; emoji: string } {
+  const gradients: Record<string, { gradient: string; emoji: string }> = {
+    "工具推荐": { gradient: "from-blue-500 to-cyan-400", emoji: "🛠️" },
+    "对比评测": { gradient: "from-purple-500 to-pink-400", emoji: "⚖️" },
+    "使用教程": { gradient: "from-green-500 to-emerald-400", emoji: "📖" },
+    "行业洞察": { gradient: "from-orange-500 to-amber-400", emoji: "🔮" },
+  };
+  return gradients[category] || { gradient: "from-indigo-500 to-purple-400", emoji: "📝" };
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
@@ -26,7 +37,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       publishedTime: post.publishedAt,
       authors: [post.author],
-      images: [{ url: post.coverImage }],
     },
   };
 }
@@ -46,6 +56,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
   
   const recentPosts = getRecentPosts(4).filter(p => p.slug !== slug);
+  const { gradient, emoji } = getCategoryGradient(post.category);
+  const displayGradient = post.coverGradient || gradient;
+  const displayEmoji = post.coverEmoji || emoji;
 
   // JSON-LD
   const jsonLd = {
@@ -53,7 +66,6 @@ export default async function BlogPostPage({ params }: PageProps) {
     "@type": "Article",
     "headline": post.title,
     "description": post.excerpt,
-    "image": post.coverImage,
     "datePublished": post.publishedAt,
     "dateModified": post.updatedAt,
     "author": {
@@ -92,12 +104,25 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* 主内容 */}
             <div className="lg:col-span-2">
               <article className="card">
-                {/* 封面图 */}
-                <img 
-                  src={post.coverImage} 
-                  alt={post.title}
-                  className="w-full h-64 object-cover rounded-lg mb-6"
-                />
+                {/* 渐变封面图 */}
+                <div className={`relative mb-6 overflow-hidden rounded-lg bg-gradient-to-br ${displayGradient}`}>
+                  {/* 装饰性圆形 */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -translate-y-1/2 translate-x-1/4" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full translate-y-1/4 -translate-x-1/4" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white opacity-5 rounded-full" />
+                  
+                  {/* Emoji图标 */}
+                  <div className="flex items-center justify-center h-64">
+                    <span className="text-8xl drop-shadow-lg">{displayEmoji}</span>
+                  </div>
+                  
+                  {/* 分类标签 */}
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-white/90 text-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-sm">
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
                 
                 {/* 文章头部 */}
                 <div className="mb-6">
@@ -173,11 +198,19 @@ export default async function BlogPostPage({ params }: PageProps) {
                       return <blockquote key={index} className="border-l-4 border-indigo-500 pl-4 italic text-slate-600 my-4">{paragraph.replace('> ', '')}</blockquote>;
                     }
                     
+                    // 处理代码块
+                    if (paragraph.startsWith('```')) {
+                      const code = paragraph.replace(/```\w*\n?/g, '');
+                      return <pre key={index} className="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto my-4"><code>{code}</code></pre>;
+                    }
+                    
                     // 普通段落
                     if (paragraph.trim()) {
                       // 处理加粗
                       const processed = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                      return <p key={index} dangerouslySetInnerHTML={{ __html: processed }} />;
+                      // 处理行内代码
+                      const codeProcessed = processed.replace(/`(.*?)`/g, '<code class="bg-slate-100 px-1 rounded text-sm">$1</code>');
+                      return <p key={index} dangerouslySetInnerHTML={{ __html: codeProcessed }} />;
                     }
                     
                     return null;

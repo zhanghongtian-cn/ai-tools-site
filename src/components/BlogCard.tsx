@@ -5,17 +5,38 @@ interface BlogCardProps {
   post: BlogPost;
 }
 
+// 根据文章分类生成默认渐变色
+function getCategoryGradient(category: string): { gradient: string; emoji: string } {
+  const gradients: Record<string, { gradient: string; emoji: string }> = {
+    "工具推荐": { gradient: "from-blue-500 to-cyan-400", emoji: "🛠️" },
+    "对比评测": { gradient: "from-purple-500 to-pink-400", emoji: "⚖️" },
+    "使用教程": { gradient: "from-green-500 to-emerald-400", emoji: "📖" },
+    "行业洞察": { gradient: "from-orange-500 to-amber-400", emoji: "🔮" },
+  };
+  return gradients[category] || { gradient: "from-indigo-500 to-purple-400", emoji: "📝" };
+}
+
 export function BlogCard({ post }: BlogCardProps) {
+  const { gradient, emoji } = getCategoryGradient(post.category);
+  const displayGradient = post.coverGradient || gradient;
+  const displayEmoji = post.coverEmoji || emoji;
+
   return (
     <Link href={`/blog/${post.slug}`} className="card block group">
-      <div className="relative mb-4 overflow-hidden rounded-lg">
-        <img 
-          src={post.coverImage} 
-          alt={post.title}
-          className="w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-        />
+      {/* 渐变背景卡片 */}
+      <div className={`relative mb-4 overflow-hidden rounded-lg bg-gradient-to-br ${displayGradient}`}>
+        {/* 装饰性圆形 */}
+        <div className="absolute top-0 right-0 w-24 h-24 bg-white opacity-10 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-16 h-16 bg-white opacity-10 rounded-full translate-y-1/2 -translate-x-1/2" />
+        
+        {/* Emoji图标 */}
+        <div className="flex items-center justify-center h-48">
+          <span className="text-6xl drop-shadow-lg">{displayEmoji}</span>
+        </div>
+        
+        {/* 分类标签 */}
         <div className="absolute top-3 left-3">
-          <span className="bg-indigo-500 text-white text-xs px-3 py-1 rounded-full">
+          <span className="bg-white/90 text-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-sm">
             {post.category}
           </span>
         </div>
